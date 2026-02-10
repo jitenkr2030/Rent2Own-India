@@ -175,7 +175,18 @@ export default function HomePage() {
               <span className="text-2xl font-bold text-gray-900">Rent2Own India</span>
             </div>
             <nav className="hidden md:flex items-center space-x-6">
-              <Button variant="ghost">Properties</Button>
+              <Button variant="ghost" asChild>
+                <a href="/properties">Properties</a>
+              </Button>
+              <Button variant="ghost" asChild>
+                <a href="/dashboard">Dashboard</a>
+              </Button>
+              <Button variant="ghost" asChild>
+                <a href="/investor">Investors</a>
+              </Button>
+              <Button variant="ghost" asChild>
+                <a href="/builder">Builders</a>
+              </Button>
               <Button variant="ghost">How it Works</Button>
               <Button variant="ghost">About Us</Button>
               <Button variant="ghost">Contact</Button>
@@ -207,8 +218,8 @@ export default function HomePage() {
               Check Eligibility
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
-            <Button size="lg" variant="outline">
-              Browse Properties
+            <Button size="lg" variant="outline" asChild>
+              <a href="/properties">Browse Properties</a>
             </Button>
           </div>
         </div>
@@ -418,8 +429,8 @@ export default function HomePage() {
           </div>
 
           <div className="text-center mt-12">
-            <Button size="lg" variant="outline">
-              View All Properties
+            <Button size="lg" variant="outline" asChild>
+              <a href="/properties">View All Properties</a>
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </div>
