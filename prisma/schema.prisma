@@ -1,8 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// Rent2Own India Database Schema
 
 generator client {
   provider = "prisma-client-js"
@@ -13,20 +9,329 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Users and Authentication
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                    String    @id @default(cuid())
+  email                 String    @unique
+  mobile                String?   @unique
+  password              String
+  name                  String?
+  userType              UserType  @default(HOME_SEEKER) // HOME_SEEKER, INVESTOR, BUILDER, ADMIN
+  emailVerified         Boolean   @default(false)
+  mobileVerified        Boolean   @default(false)
+  profileComplete       Boolean   @default(false)
+  kycStatus             KYCStatus @default(PENDING)
+  kycDocuments          KYCDocuments?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  // Relations
+  homeSeekerProfile     HomeSeekerProfile?
+  investorProfile       InvestorProfile?
+  builderProfile        BuilderProfile?
+  propertyApplications   PropertyApplication[]
+  payments              Payment[]
+  documents             UserDocument[]
+  sessions              UserSession[]
+
+  @@map("users")
 }
 
-model Post {
+model UserSession {
   id        String   @id @default(cuid())
-  title     String
-  content   String?
-  published Boolean  @default(false)
-  authorId  String
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_sessions")
+}
+
+// KYC Documents
+model KYCDocuments {
+  id           String    @id @default(cuid())
+  userId       String    @unique
+  aadhaarNumber String?  @unique
+  panNumber    String?   @unique
+  aadhaarUrl   String?
+  panUrl       String?
+  selfieUrl    String?
+  verifiedAt   DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("kyc_documents")
+}
+
+// User Profiles
+model HomeSeekerProfile {
+  id                    String    @id @default(cuid())
+  userId                String    @unique
+  dateOfBirth           DateTime?
+  employmentType        String?   // SALARIED, SELF_EMPLOYED, BUSINESS
+  companyName           String?
+  monthlyIncome         Float?
+  workExperience        Int?      // in years
+  familySize            Int?
+  maritalStatus         String?
+  currentCity           String?
+  currentAddress        String?
+  affordabilityScore    Float?    @default(0)
+  maxMonthlyPayment     Float?
+  preferredCities       String?   // JSON array
+  preferredBhk          String?
+  preferredBudget       Float?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("home_seeker_profiles")
+}
+
+model InvestorProfile {
+  id                    String    @id @default(cuid())
+  userId                String    @unique
+  investorType          String?   // INDIVIDUAL, INSTITUTIONAL, HNI
+  totalInvestment       Float?
+  riskProfile           String?   // CONSERVATIVE, MODERATE, AGGRESSIVE
+  investmentHorizon     Int?      // in years
+  expectedReturns       Float?    // percentage
+  bankDetails           String?   // JSON
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("investor_profiles")
+}
+
+model BuilderProfile {
+  id                    String    @id @default(cuid())
+  userId                String    @unique
+  companyName           String
+  companyType           String?   // DEVELOPER, BUILDER, CONSTRUCTOR
+  reraRegistration      String?   @unique
+  establishedYear       Int?
+  totalProjects         Int?
+  completedProjects     Int?
+  website               String?
+  headquarters          String?
+  contactPerson         String?
+  contactEmail          String?
+  contactMobile         String?
+  bankDetails           String?   // JSON
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  properties Property[]
+
+  @@map("builder_profiles")
+}
+
+// Properties
+model Property {
+  id                    String           @id @default(cuid())
+  builderId             String
+  title                 String
+  description           String?
+  propertyType          PropertyType     @default(APARTMENT)
+  bhk                   Int
+  bathrooms             Int?
+  balconies             Int?
+  carpetArea            Float            // in sq ft
+  builtUpArea           Float?           // in sq ft
+  superBuiltUpArea      Float?           // in sq ft
+  totalPrice            Float
+  rent2OwnPrice         Float
+  monthlyPayment        Float
+  tenure                Int              // in years
+  appreciationCap       Float?           // percentage
+  address               String
+  city                  String
+  state                 String
+  pincode               String
+  locality              String
+  latitude              Float?
+  longitude             Float?
+  possessionDate        DateTime?
+  reraApproved          Boolean          @default(false)
+  reraNumber            String?
+  legalClear            Boolean          @default(true)
+  status                PropertyStatus   @default(AVAILABLE)
+  amenities             String?          // JSON array
+  floorPlans            String?          // JSON array of URLs
+  images                String?          // JSON array of URLs
+  virtualTourUrl        String?
+  specifications        String?          // JSON
+  createdAt             DateTime         @default(now())
+  updatedAt             DateTime         @updatedAt
+
+  // Relations
+  builder               BuilderProfile   @relation(fields: [builderId], references: [userId])
+  applications          PropertyApplication[]
+  payments              Payment[]
+  documents             PropertyDocument[]
+  investments           PropertyInvestment[]
+
+  @@map("properties")
+}
+
+model PropertyDocument {
+  id         String   @id @default(cuid())
+  propertyId String
+  documentType String // TITLE_DEED, APPROVAL_PLAN, OCCUPANCY_CERTIFICATE, etc.
+  documentUrl String
+  verified   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  property Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@map("property_documents")
+}
+
+// Property Applications and Investments
+model PropertyApplication {
+  id           String            @id @default(cuid())
+  userId       String
+  propertyId   String
+  status       ApplicationStatus @default(PENDING)
+  appliedAt    DateTime          @default(now())
+  reviewedAt   DateTime?
+  reviewedBy   String?
+  rejectionReason String?
+  approvalTerms String?          // JSON
+
+  user     User     @relation(fields: [userId], references: [id])
+  property Property @relation(fields: [propertyId], references: [id])
+
+  @@unique([userId, propertyId])
+  @@map("property_applications")
+}
+
+model PropertyInvestment {
+  id           String   @id @default(cuid())
+  propertyId   String
+  investorId   String
+  investmentAmount Float
+  equityPercentage Float
+  expectedReturns   Float?
+  status       String   @default("ACTIVE")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  property Property @relation(fields: [propertyId], references: [id])
+
+  @@map("property_investments")
+}
+
+// Payments and Equity
+model Payment {
+  id              String      @id @default(cuid())
+  userId          String
+  propertyId      String?
+  amount          Float
+  paymentType     PaymentType @default(RENT)
+  paymentMethod   String?     // UPI, NACH, CARD, etc.
+  transactionId   String?     @unique
+  status          PaymentStatus @default(PENDING)
+  dueDate         DateTime
+  paidAt          DateTime?
+  equityComponent Float?      // portion that goes to equity
+  rentComponent   Float?      // portion that is rent
+  lateFee         Float?      @default(0)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  user     User     @relation(fields: [userId], references: [id])
+  property Property? @relation(fields: [propertyId], references: [id])
+
+  @@map("payments")
+}
+
+model EquityAccumulation {
+  id               String   @id @default(cuid())
+  userId           String
+  propertyId       String
+  totalEquity      Float    @default(0)
+  monthlyEquity    Float
+  ownershipPercentage Float @default(0)
+  remainingBalance Float
+  lastUpdated      DateTime @default(now())
+
+  @@unique([userId, propertyId])
+  @@map("equity_accumulations")
+}
+
+// User Documents
+model UserDocument {
+  id           String   @id @default(cuid())
+  userId       String
+  documentType String   // ID_PROOF, ADDRESS_PROOF, INCOME_PROOF, etc.
+  documentUrl  String
+  verified     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_documents")
+}
+
+// Enums
+enum UserType {
+  HOME_SEEKER
+  INVESTOR
+  BUILDER
+  ADMIN
+}
+
+enum KYCStatus {
+  PENDING
+  SUBMITTED
+  VERIFIED
+  REJECTED
+}
+
+enum PropertyType {
+  APARTMENT
+  VILLA
+  TOWNHOUSE
+  PENTHOUSE
+  STUDIO
+}
+
+enum PropertyStatus {
+  AVAILABLE
+  OCCUPIED
+  UNDER_CONSTRUCTION
+  MAINTENANCE
+  SOLD
+}
+
+enum ApplicationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  WITHDRAWN
+}
+
+enum PaymentType {
+  RENT
+  EQUITY
+  MAINTENANCE
+  DEPOSIT
+  PROCESSING_FEE
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
 }

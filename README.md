@@ -1,141 +1,294 @@
-# 🚀 Welcome to Z.ai Code Scaffold
+# 🏠 Rent2Own India
 
-A modern, production-ready web application scaffold powered by cutting-edge technologies, designed to accelerate your development with [Z.ai](https://chat.z.ai)'s AI-powered coding assistance.
+Transform rent into ownership — transparently, gradually, and safely.
 
-## ✨ Technology Stack
+## 📋 Overview
 
-This scaffold provides a robust foundation built with:
+Rent2Own India is a comprehensive platform that revolutionizes the Indian housing market by enabling home seekers to convert their monthly rent payments into equity ownership. Our platform bridges the gap between renting and owning, making homeownership accessible to millions of Indians.
 
-### 🎯 Core Framework
-- **⚡ Next.js 16** - The React framework for production with App Router
-- **📘 TypeScript 5** - Type-safe JavaScript for better developer experience
-- **🎨 Tailwind CSS 4** - Utility-first CSS framework for rapid UI development
+## ✨ Key Features
 
-### 🧩 UI Components & Styling
-- **🧩 shadcn/ui** - High-quality, accessible components built on Radix UI
-- **🎯 Lucide React** - Beautiful & consistent icon library
-- **🌈 Framer Motion** - Production-ready motion library for React
-- **🎨 Next Themes** - Perfect dark mode in 2 lines of code
+### 🏠 For Home Seekers
+- **Smart Onboarding**: Mobile/email signup with Aadhaar/PAN based KYC
+- **AI-Powered Affordability Engine**: Personalized scoring and monthly payment simulation
+- **Property Discovery**: Verified Rent2Own-eligible homes with advanced filtering
+- **Equity Dashboard**: Track your ownership journey with real-time progress
+- **Seamless Payments**: Single monthly payment with auto-debit (UPI/NACH)
+- **Digital Agreements**: Paperless onboarding with eSign capabilities
 
-### 📋 Forms & Validation
-- **🎣 React Hook Form** - Performant forms with easy validation
-- **✅ Zod** - TypeScript-first schema validation
+### 💰 For Investors
+- **Portfolio Dashboard**: Complete overview of investments and returns
+- **Risk Analytics**: AI-driven default prediction and asset health scoring
+- **Liquidity Options**: Secondary market trading and flexible exit strategies
+- **Performance Tracking**: IRR analytics and yield monitoring
 
-### 🔄 State Management & Data Fetching
-- **🐻 Zustand** - Simple, scalable state management
-- **🔄 TanStack Query** - Powerful data synchronization for React
-- **🌐 Fetch** - Promise-based HTTP request
+### 🏗️ For Builders
+- **Property Management**: Streamlined inventory onboarding and pricing control
+- **Buyer Management**: Application tracking and occupancy monitoring
+- **Compliance Tools**: RERA-aligned reporting and standardized agreements
+- **Marketing Solutions**: Reduced customer acquisition costs
 
-### 🗄️ Database & Backend
-- **🗄️ Prisma** - Next-generation TypeScript ORM
-- **🔐 NextAuth.js** - Complete open-source authentication solution
+### 🛠️ For Administrators
+- **Control Panel**: End-to-end operational oversight
+- **Compliance Engine**: Automated legal and regulatory compliance
+- **Analytics Dashboard**: Platform-wide insights and reporting
 
-### 🎨 Advanced UI Features
-- **📊 TanStack Table** - Headless UI for building tables and datagrids
-- **🖱️ DND Kit** - Modern drag and drop toolkit for React
-- **📊 Recharts** - Redefined chart library built with React and D3
-- **🖼️ Sharp** - High performance image processing
+## 🚀 Technology Stack
 
-### 🌍 Internationalization & Utilities
-- **🌍 Next Intl** - Internationalization library for Next.js
-- **📅 Date-fns** - Modern JavaScript date utility library
-- **🪝 ReactUse** - Collection of essential React hooks for modern development
+### Frontend
+- **Framework**: Next.js 16 with App Router
+- **Language**: TypeScript 5
+- **Styling**: Tailwind CSS 4
+- **UI Components**: shadcn/ui (New York style)
+- **Icons**: Lucide React
+- **State Management**: Zustand + TanStack Query
 
-## 🎯 Why This Scaffold?
+### Backend
+- **API**: Next.js API Routes
+- **Database**: SQLite with Prisma ORM
+- **Authentication**: Secure session-based auth with bcrypt
+- **Validation**: Zod schemas
+- **File Upload**: Ready for integration
 
-- **🏎️ Fast Development** - Pre-configured tooling and best practices
-- **🎨 Beautiful UI** - Complete shadcn/ui component library with advanced interactions
-- **🔒 Type Safety** - Full TypeScript configuration with Zod validation
-- **📱 Responsive** - Mobile-first design principles with smooth animations
-- **🗄️ Database Ready** - Prisma ORM configured for rapid backend development
-- **🔐 Auth Included** - NextAuth.js for secure authentication flows
-- **📊 Data Visualization** - Charts, tables, and drag-and-drop functionality
-- **🌍 i18n Ready** - Multi-language support with Next Intl
-- **🚀 Production Ready** - Optimized build and deployment settings
-- **🤖 AI-Friendly** - Structured codebase perfect for AI assistance
-
-## 🚀 Quick Start
-
-```bash
-# Install dependencies
-bun install
-
-# Start development server
-bun run dev
-
-# Build for production
-bun run build
-
-# Start production server
-bun start
-```
-
-Open [http://localhost:3000](http://localhost:3000) to see your application running.
-
-## 🤖 Powered by Z.ai
-
-This scaffold is optimized for use with [Z.ai](https://chat.z.ai) - your AI assistant for:
-
-- **💻 Code Generation** - Generate components, pages, and features instantly
-- **🎨 UI Development** - Create beautiful interfaces with AI assistance  
-- **🔧 Bug Fixing** - Identify and resolve issues with intelligent suggestions
-- **📝 Documentation** - Auto-generate comprehensive documentation
-- **🚀 Optimization** - Performance improvements and best practices
-
-Ready to build something amazing? Start chatting with Z.ai at [chat.z.ai](https://chat.z.ai) and experience the future of AI-powered development!
+### Development Tools
+- **Package Manager**: Bun
+- **Linting**: ESLint with Next.js rules
+- **Type Checking**: TypeScript strict mode
 
 ## 📁 Project Structure
 
 ```
-src/
-├── app/                 # Next.js App Router pages
-├── components/          # Reusable React components
-│   └── ui/             # shadcn/ui components
-├── hooks/              # Custom React hooks
-└── lib/                # Utility functions and configurations
+rent2own-india/
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── api/               # API endpoints
+│   │   │   ├── auth/          # Authentication routes
+│   │   │   ├── properties/    # Property management
+│   │   │   └── calculator/    # Affordability calculator
+│   │   ├── globals.css        # Global styles
+│   │   ├── layout.tsx         # Root layout
+│   │   └── page.tsx           # Home page
+│   ├── components/
+│   │   └── ui/                # shadcn/ui components
+│   ├── lib/
+│   │   ├── db.ts              # Prisma client
+│   │   └── utils.ts           # Utility functions
+│   └── hooks/                 # Custom React hooks
+├── prisma/
+│   └── schema.prisma          # Database schema
+├── scripts/
+│   └── seed.ts                # Database seeding
+├── public/                    # Static assets
+└── docs/                      # Documentation
 ```
 
-## 🎨 Available Features & Components
+## 🗄️ Database Schema
 
-This scaffold includes a comprehensive set of modern web development tools:
+Our comprehensive database includes:
 
-### 🧩 UI Components (shadcn/ui)
-- **Layout**: Card, Separator, Aspect Ratio, Resizable Panels
-- **Forms**: Input, Textarea, Select, Checkbox, Radio Group, Switch
-- **Feedback**: Alert, Toast (Sonner), Progress, Skeleton
-- **Navigation**: Breadcrumb, Menubar, Navigation Menu, Pagination
-- **Overlay**: Dialog, Sheet, Popover, Tooltip, Hover Card
-- **Data Display**: Badge, Avatar, Calendar
+### Core Models
+- **Users**: Multi-type user system (Home Seeker, Investor, Builder, Admin)
+- **Properties**: Detailed property listings with specifications
+- **Payments**: Transaction tracking with equity/rent split
+- **Applications**: Property application and approval workflow
+- **Documents**: KYC and property documentation
 
-### 📊 Advanced Data Features
-- **Tables**: Powerful data tables with sorting, filtering, pagination (TanStack Table)
-- **Charts**: Beautiful visualizations with Recharts
-- **Forms**: Type-safe forms with React Hook Form + Zod validation
+### Specialized Models
+- **EquityAccumulation**: Track ownership progress
+- **PropertyInvestment**: Investor funding and returns
+- **UserSessions**: Secure session management
+- **HomeSeekerProfile**: Detailed buyer profiling
+- **InvestorProfile**: Investment preferences and history
+- **BuilderProfile**: Builder verification and track record
 
-### 🎨 Interactive Features
-- **Animations**: Smooth micro-interactions with Framer Motion
-- **Drag & Drop**: Modern drag-and-drop functionality with DND Kit
-- **Theme Switching**: Built-in dark/light mode support
+## 🛠️ Installation & Setup
 
-### 🔐 Backend Integration
-- **Authentication**: Ready-to-use auth flows with NextAuth.js
-- **Database**: Type-safe database operations with Prisma
-- **API Client**: HTTP requests with Fetch + TanStack Query
-- **State Management**: Simple and scalable with Zustand
+### Prerequisites
+- Node.js 18+ or Bun
+- Git
 
-### 🌍 Production Features
-- **Internationalization**: Multi-language support with Next Intl
-- **Image Optimization**: Automatic image processing with Sharp
-- **Type Safety**: End-to-end TypeScript with Zod validation
-- **Essential Hooks**: 100+ useful React hooks with ReactUse for common patterns
+### Quick Start
 
-## 🤝 Get Started with Z.ai
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/jitenkr2030/Rent2Own-India.git
+   cd Rent2Own-India
+   ```
 
-1. **Clone this scaffold** to jumpstart your project
-2. **Visit [chat.z.ai](https://chat.z.ai)** to access your AI coding assistant
-3. **Start building** with intelligent code generation and assistance
-4. **Deploy with confidence** using the production-ready setup
+2. **Install dependencies**
+   ```bash
+   bun install
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configuration
+   ```
+
+4. **Initialize database**
+   ```bash
+   bun run db:push
+   ```
+
+5. **Seed sample data**
+   ```bash
+   bunx tsx scripts/seed.ts
+   ```
+
+6. **Start development server**
+   ```bash
+   bun run dev
+   ```
+
+7. **Open your browser**
+   Navigate to `http://localhost:3000`
+
+## 📊 Sample Data
+
+The platform comes pre-seeded with:
+
+- **3 User Types**: Home seekers, investors, and builders
+- **Sample Properties**: Properties across Bangalore with different configurations
+- **Payment History**: 6 months of payment data with equity accumulation
+- **Applications**: Sample property applications and approvals
+
+### Test Accounts
+- **Home Seeker**: `priya.sharma@example.com` / `password123`
+- **Investor**: `rahul.verma@example.com` / `password123`
+- **Builder**: `builder@premiumconstructions.com` / `password123`
+
+## 🔧 API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+
+### Properties
+- `GET /api/properties` - List properties with filtering
+- `POST /api/properties` - Create new property (builder)
+
+### Calculator
+- `POST /api/calculator/affordability` - Calculate affordability score
+
+## 🎯 Core Features Deep Dive
+
+### Affordability Engine
+Our AI-powered affordability calculator evaluates:
+- **Income Analysis**: Monthly income vs expenses ratio
+- **Credit Assessment**: Credit score impact on eligibility
+- **FOIR Compliance**: Fixed Obligation to Income Ratio (50% standard)
+- **Down Payment**: Capability assessment and recommendations
+- **Loan Eligibility**: Maximum loan amount and EMI calculations
+
+### Equity Accumulation
+- **Transparent Tracking**: Real-time equity buildup visualization
+- **Ownership Percentage**: Clear path to 100% ownership
+- **Payment Breakdown**: Rent vs equity component analysis
+- **Early Buyout Options**: Flexible ownership acceleration
+
+### Property Discovery
+- **Smart Filters**: City, budget, BHK, tenure, property type
+- **Verified Listings**: RERA-approved and legally clear properties
+- **Virtual Tours**: Immersive property exploration
+- **Builder Ratings**: Trust and transparency metrics
+
+## 🔒 Security Features
+
+- **Secure Authentication**: bcrypt password hashing
+- **Session Management**: Secure token-based sessions
+- **Input Validation**: Comprehensive Zod schema validation
+- **SQL Injection Prevention**: Prisma ORM parameterized queries
+- **XSS Protection**: Built-in Next.js security headers
+
+## 📱 Responsive Design
+
+- **Mobile-First**: Optimized for all device sizes
+- **Progressive Enhancement**: Core functionality on all devices
+- **Touch-Friendly**: 44px minimum touch targets
+- **Accessible**: WCAG 2.1 compliance with semantic HTML
+
+## 🧪 Testing
+
+### Linting
+```bash
+bun run lint
+```
+
+### Database Operations
+```bash
+bun run db:push      # Push schema changes
+bun run db:generate   # Generate Prisma client
+bun run db:reset      # Reset database (development only)
+```
+
+## 🚀 Deployment
+
+### Production Build
+```bash
+bun run build
+```
+
+### Environment Variables
+```env
+DATABASE_URL="file:./db/custom.db"
+NEXTAUTH_SECRET="your-secret-key"
+NEXTAUTH_URL="http://localhost:3000"
+```
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Next.js Team**: For the amazing framework
+- **Prisma Team**: For the excellent ORM
+- **shadcn/ui**: For the beautiful component library
+- **Tailwind CSS**: For the utility-first CSS framework
+
+## 📞 Contact
+
+- **Website**: [Rent2Own India](https://rent2own.in)
+- **Email**: support@rent2own.in
+- **Phone**: +91 80XXXXXX90
+- **Address**: Bangalore, India
+
+## 🗺️ Roadmap
+
+### Phase 1 (Current)
+- ✅ Core platform functionality
+- ✅ User authentication and profiles
+- ✅ Property discovery and listings
+- ✅ Affordability calculator
+- ✅ Basic payment tracking
+
+### Phase 2 (Upcoming)
+- 🔄 Payment gateway integration
+- 🔄 Document upload and verification
+- 🔄 Advanced analytics dashboards
+- 🔄 Mobile applications
+- 🔄 AI recommendation engine
+
+### Phase 3 (Future)
+- 📋 Tokenized equity (fractional ownership)
+- 📋 Employer-assisted Rent2Own programs
+- 📋 Credit score building integration
+- 📋 Government housing scheme integration
+- 📋 Blockchain-based title transfers
 
 ---
 
-Built with ❤️ for the developer community. Supercharged by [Z.ai](https://chat.z.ai) 🚀
+🏠 **Rent2Own India** - Making homeownership a reality, one monthly payment at a time!
+
+*"Transform your rent from an expense into an investment in your future."*
