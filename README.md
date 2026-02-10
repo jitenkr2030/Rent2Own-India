@@ -168,8 +168,25 @@ The platform comes pre-seeded with:
 - `GET /api/properties` - List properties with filtering
 - `POST /api/properties` - Create new property (builder)
 
+### Payments
+- `GET /api/payments` - List payment history
+- `POST /api/payments` - Create new payment
+- `POST /api/payments/process` - Process payment status
+
 ### Calculator
 - `POST /api/calculator/affordability` - Calculate affordability score
+
+## 📱 Platform Pages
+
+### User-Facing Pages
+- `/` - Landing page with platform overview
+- `/properties` - Advanced property discovery and filtering
+- `/dashboard` - Equity accumulation dashboard for home seekers
+
+### Stakeholder Portals
+- `/investor` - Investment portfolio and analytics dashboard
+- `/builder` - Property management and application portal
+- `/admin` - Administrative control panel and system oversight
 
 ## 🎯 Core Features Deep Dive
 
@@ -181,17 +198,40 @@ Our AI-powered affordability calculator evaluates:
 - **Down Payment**: Capability assessment and recommendations
 - **Loan Eligibility**: Maximum loan amount and EMI calculations
 
-### Equity Accumulation
-- **Transparent Tracking**: Real-time equity buildup visualization
+### Equity Accumulation Dashboard (Core Feature)
+- **Real-time Tracking**: Live equity buildup visualization
 - **Ownership Percentage**: Clear path to 100% ownership
-- **Payment Breakdown**: Rent vs equity component analysis
+- **Payment Breakdown**: Detailed rent vs equity component analysis
+- **Monthly Progress**: Track payments and ownership growth
 - **Early Buyout Options**: Flexible ownership acceleration
 
 ### Property Discovery
-- **Smart Filters**: City, budget, BHK, tenure, property type
+- **Advanced Filtering**: City, budget, BHK, tenure, property type, amenities
+- **Smart Search**: Location, property name, and description search
 - **Verified Listings**: RERA-approved and legally clear properties
 - **Virtual Tours**: Immersive property exploration
 - **Builder Ratings**: Trust and transparency metrics
+
+### Investor Dashboard
+- **Portfolio Analytics**: Complete investment overview
+- **Risk Assessment**: AI-driven risk scoring and analysis
+- **Performance Tracking**: IRR, yields, and cash flow monitoring
+- **Investment Opportunities**: Curated Rent2Own properties
+- **Liquidity Options**: Secondary market trading potential
+
+### Builder Partner Portal
+- **Property Management**: End-to-end listing and occupancy tracking
+- **Application Management**: Review and approve home seeker applications
+- **Revenue Analytics**: Track rental income and processing fees
+- **Compliance Tools**: RERA reporting and documentation
+- **Performance Metrics**: Occupancy rates and property analytics
+
+### Admin Control Panel
+- **User Management**: Oversee all platform users and roles
+- **System Health**: Monitor platform performance and uptime
+- **Compliance Oversight**: Ensure regulatory compliance
+- **Revenue Tracking**: Platform-wide financial analytics
+- **Activity Monitoring**: Real-time platform activity logs
 
 ## 🔒 Security Features
 
