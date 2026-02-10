@@ -430,8 +430,10 @@ export default function HomePage() {
 
           <div className="text-center mt-12">
             <Button size="lg" variant="outline" asChild>
-              <a href="/properties">View All Properties</a>
-              <ArrowRight className="ml-2 w-5 h-5" />
+              <a href="/properties" className="flex items-center">
+                View All Properties
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </a>
             </Button>
           </div>
         </div>
